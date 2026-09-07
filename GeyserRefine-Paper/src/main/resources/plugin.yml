@@ -1,0 +1,23 @@
+name: GeyserRefine
+version: ${project.version}
+main: com.emuyx.geyserrefine.paper.GeyserRefinePlugin
+api-version: 1.21
+depend:
+  - floodgate
+softdepend:
+  - packetevents
+commands:
+  geyserrefine:
+    description: GeyserRefine management commands
+    usage: /geyserrefine <reload|settings|escape>
+    aliases: [gr]
+permissions:
+  geyserrefine.reload:
+    description: Allows reloading the config
+    default: op
+  geyserrefine.tracker:
+    description: Allows spawning/removing damage trackers
+    default: op
+  geyserrefine.use:
+    description: Allows using /bct
+    default: true

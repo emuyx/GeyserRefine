@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.emuyx</groupId>
+    <artifactId>GeyserRefineParent</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>GeyserRefine-Paper</module>
+        <module>GeyserRefine-Extension</module>
+    </modules>
+
+    <properties>
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 统一版本管理 -->
+        <paper.api.version>1.21.1-R0.1-SNAPSHOT</paper.api.version>
+        <packetevents.version>2.12.1</packetevents.version>
+        <floodgate.api.version>2.2.2-SNAPSHOT</floodgate.api.version>
+        <geyser.core.version>2.11.0-SNAPSHOT</geyser.core.version>
+        <viaversion.api.version>5.2.1</viaversion.api.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>codemc-releases</id>
+            <url>https://repo.codemc.io/repository/maven-releases/</url>
+        </repository>
+        <repository>
+            <id>opencollab-snapshot</id>
+            <url>https://repo.opencollab.dev/main/</url>
+        </repository>
+        <repository>
+            <id>viaversion</id>
+            <url>https://repo.viaversion.com</url>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- 这里可以声明子模块共用的依赖版本，但各模块各自添加 scope 为 provided -->
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.14.0</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+                <!-- 可选：shade 插件若需要也可在此管理，但各模块独立配置 -->
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

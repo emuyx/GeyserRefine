@@ -1,0 +1,6 @@
+id: geyserrefine
+name: GeyserRefine
+main: com.emuyx.geyserrefine.extension.GeyserRefineExtension
+api: 2.10.0
+version: ${project.version}
+authors: [emuyx]

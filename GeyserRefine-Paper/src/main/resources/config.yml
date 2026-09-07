@@ -1,0 +1,126 @@
+# Bedrock Combat Configuration
+# All values are applied ONLY to Bedrock players (Java players remain vanilla).
+
+attack-cooldown:
+  generic-attack-speed: 40.0
+
+# 武器额外攻击力（手持时实际伤害 = 1(空手) + 武器攻击力）
+# 数值基于基岩版原版（无 .5 小数）
+old-tool-damage:
+  damages:
+    # === 剑 ===
+    minecraft:wooden_sword: 4.0
+    minecraft:stone_sword: 5.0
+    minecraft:golden_sword: 4.0
+    minecraft:iron_sword: 6.0
+    minecraft:diamond_sword: 7.0
+    minecraft:netherite_sword: 8.0
+    minecraft:copper_sword: 5.0
+    # === 斧 ===
+    minecraft:wooden_axe: 3.0
+    minecraft:stone_axe: 4.0
+    minecraft:iron_axe: 5.0
+    minecraft:golden_axe: 3.0
+    minecraft:diamond_axe: 6.0
+    minecraft:netherite_axe: 7.0
+    minecraft:copper_axe: 4.0
+    # === 镐（石镐 = 铜镐） ===
+    minecraft:wooden_pickaxe: 2.0
+    minecraft:stone_pickaxe: 3.0
+    minecraft:copper_pickaxe: 3.0
+    minecraft:iron_pickaxe: 4.0
+    minecraft:golden_pickaxe: 2.0
+    minecraft:diamond_pickaxe: 5.0
+    minecraft:netherite_pickaxe: 6.0
+    # === 锹 ===
+    minecraft:wooden_shovel: 1.0
+    minecraft:stone_shovel: 2.0
+    minecraft:copper_shovel: 2.0
+    minecraft:iron_shovel: 3.0
+    minecraft:golden_shovel: 1.0
+    minecraft:diamond_shovel: 4.0
+    minecraft:netherite_shovel: 5.0
+    # === 锄（木锄 = 2） ===
+    minecraft:wooden_hoe: 2.0
+    minecraft:stone_hoe: 2.0
+    minecraft:copper_hoe: 2.0
+    minecraft:iron_hoe: 2.0
+    minecraft:golden_hoe: 2.0
+    minecraft:diamond_hoe: 2.0
+    minecraft:netherite_hoe: 2.0
+    # === 矛（木矛 = 1，逐级递增） ===
+    minecraft:wooden_spear: 1.0
+    minecraft:stone_spear: 2.0
+    minecraft:copper_spear: 3.0
+    minecraft:iron_spear: 4.0
+    minecraft:golden_spear: 3.0
+    minecraft:diamond_spear: 5.0
+    minecraft:netherite_spear: 6.0
+    # === 特殊 ===
+    minecraft:mace: 5.0       # 重锤
+    minecraft:trident: 8.0    # 三叉戟
+
+critical-hits:
+  multiplier: 1.5
+  allow-sprinting: true
+
+player-regen:
+  interval-ticks: 80
+  amount: 1
+  exhaustion: 3.0
+
+knockback:
+  horizontal: 0.4
+  vertical: 0.4
+  vertical-limit: 0.4
+  extra-horizontal: 0.5
+  extra-vertical: 0.1
+
+projectile-knockback:
+  damage: 0.001
+  knockback-strength: 0.4
+
+fishing-rod:
+  velocity-multiplier: 4.0
+  gravity-multiplier: 1.3
+  throw-height-offset: -0.5
+  knockback-damage: 0.001
+  knockback-horizontal: 0.4
+  knockback-vertical: 0.4
+  cancel-drag: false
+  drag-strength: 1.1
+
+block-interaction-range:
+  keyboard_mouse: 5.6
+  controller: 5.7
+  touch: 6.7
+  unknown: 6.7
+
+particles:
+  remove-attack-indicator: true
+  remove-sweep: true
+
+sounds:
+  remove-sweep-sound: true
+
+combat-sounds:
+  on-kill: true
+  on-critical: true
+  swing-sounds: true
+
+movement:
+  block-fail-move: true
+
+player-defaults:
+  java-attack: false
+
+# 跨类型 PvP 连击伤害递减（仅基岩↔Java 之间生效，打怪/同类型不生效）
+combo-decay:
+  enabled: true
+  window-ticks: 15      # 窗口时间内算连击（15 刻 = 0.75 秒）
+  decay-per-hit: 0.2    # 每次连击递减 20%
+  min-multiplier: 0.4   # 最低伤害倍率 40%
+
+# 基岩版披风在Java客户端显示（实验性）
+cape-workaround:
+  enabled: false
