@@ -19,16 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-------------------------------------------------------------
-AI 参与声明 / AI Contribution Notice
-------------------------------------------------------------
-本项目在开发过程中使用 AI 编程助手（Anthropic Claude / Claude Code）
-参与了大量代码编写、问题排查与文档整理。代码中的缺陷、遗漏或风格差异
-可能源于 AI 辅助生成，使用者应自行审查并承担使用风险。
-
-This project was developed with substantial assistance from an AI coding
-assistant (Anthropic Claude / Claude Code) for code authoring, debugging and
-documentation. Bugs, omissions or style inconsistencies possibly introduced
-by AI-generated code should be reviewed by the user, who assumes all risk of
-use.
