@@ -1,6 +1,8 @@
 package com.emuyx.geyserrefine.extension;
 
 import com.emuyx.geyserrefine.extension.freecam.FreecamHandler;
+import com.emuyx.geyserrefine.extension.i18n.Lang;
+import com.emuyx.geyserrefine.extension.storage.ToastSettingsStorage;
 import org.geysermc.cumulus.form.SimpleForm;
 import org.geysermc.cumulus.util.FormImage;
 import org.geysermc.geyser.session.GeyserSession;
@@ -21,25 +23,27 @@ public class MenuForm {
     private static final int ACT_FREECAM = 6;
 
     public static void open(GeyserSession session) {
+        ToastSettingsStorage storage = GeyserRefineExtension.getToastStorage();
+        String lang = storage != null ? Lang.resolve(session, storage) : "zh_CN";
         // 是否与 Paper 配对：攻击设置需要 Paper 才能生效，未配对时隐藏
         boolean paired = GeyserRefineExtension.isPairedToPaper();
         boolean freecamOn = GeyserRefineConfig.isFreecamEnabled();
 
-        SimpleForm.Builder builder = SimpleForm.builder().title("§l§6基岩版菜单");
+        SimpleForm.Builder builder = SimpleForm.builder().title("§l§6" + Lang.tr(lang, "menu.title"));
         List<Integer> actions = new ArrayList<>();
 
         // 功能按钮
-        add(builder, actions, ACT_RECONNECT, "快速重连", "textures/ui/refresh_hover.png");
-        add(builder, actions, ACT_PROGRESS, "进度", "textures/ui/achievements.png");
-        add(builder, actions, ACT_STATS, "统计", "textures/ui/world_glyph_color_2x_black_outline.png");
+        add(builder, actions, ACT_RECONNECT, Lang.tr(lang, "menu.reconnect"), "textures/ui/refresh_hover.png");
+        add(builder, actions, ACT_PROGRESS, Lang.tr(lang, "menu.progress"), "textures/ui/achievements.png");
+        add(builder, actions, ACT_STATS, Lang.tr(lang, "menu.stats"), "textures/ui/world_glyph_color_2x_black_outline.png");
         // 设置按钮（攻击设置仅在配对时显示）
         if (paired) {
-            add(builder, actions, ACT_ATTACK, "攻击设置", "textures/ui/settings_glyph_color_2x.png");
+            add(builder, actions, ACT_ATTACK, Lang.tr(lang, "menu.attack"), "textures/ui/settings_glyph_color_2x.png");
         }
-        add(builder, actions, ACT_AUX, "辅助性设置", "textures/ui/settings_glyph_color_2x.png");
-        add(builder, actions, ACT_INTERFACE, "界面元素设置", "textures/ui/settings_glyph_color_2x.png");
+        add(builder, actions, ACT_AUX, Lang.tr(lang, "menu.aux"), "textures/ui/settings_glyph_color_2x.png");
+        add(builder, actions, ACT_INTERFACE, Lang.tr(lang, "menu.interface"), "textures/ui/settings_glyph_color_2x.png");
         if (freecamOn) {
-            add(builder, actions, ACT_FREECAM, "灵魂出窍", "textures/ui/icon_import.png");
+            add(builder, actions, ACT_FREECAM, Lang.tr(lang, "menu.freecam"), "textures/ui/icon_import.png");
         }
 
         SimpleForm form = builder

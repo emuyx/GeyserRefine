@@ -1,5 +1,7 @@
 # GeyserRefine
 
+[简体中文](README.md) | [English](README.en-US.md)
+
 面向 Geyser 互通服务器，为 Java 服务器上的基岩版（Geyser）玩家补充一些额外的功能。攻击机制只是其中一部分，整体还包括客户端体验、界面与辅助设置等。
 
 功能构想与部分实现思路受 [GeyserExtras](https://github.com/GeyserExtras/GeyserExtras) 启发。

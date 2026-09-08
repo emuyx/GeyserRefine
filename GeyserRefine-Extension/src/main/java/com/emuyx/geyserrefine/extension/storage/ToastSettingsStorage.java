@@ -244,13 +244,13 @@ public class ToastSettingsStorage {
         setSetting(xuid, "force-sprint", enabled);
     }
 
-    // 双击背包打开菜单（默认开启）
-    public boolean getDoubleClickMenu(String xuid) {
-        return getSetting(xuid, "double-click-menu", true);
+    // 界面语言（"auto" 或语言代码，如 zh_CN/en_US/zh_TW/ja_JP）
+    public String getLanguage(String xuid) {
+        return getSetting(xuid, "language", "auto");
     }
 
-    public void setDoubleClickMenu(String xuid, boolean enabled) {
-        setSetting(xuid, "double-click-menu", enabled);
+    public void setLanguage(String xuid, String language) {
+        setSetting(xuid, "language", language);
     }
 
     // 从Paper同步（夜视已改为 extension 端处理，Paper 只同步 java-attack）
