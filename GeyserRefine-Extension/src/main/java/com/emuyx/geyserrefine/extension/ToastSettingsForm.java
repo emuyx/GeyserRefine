@@ -25,6 +25,7 @@ public class ToastSettingsForm {
         boolean advancedTooltips = storage.getAdvancedTooltips(xuid);
         boolean customSkulls = storage.getCustomSkulls(xuid);
         boolean promptOnLinks = storage.getPromptOnLinks(xuid);
+        boolean forceSprint = storage.getForceSprint(xuid);
 
         String savedMsg = Lang.tr(lang, "msg.auxSaved");
         CustomForm form = CustomForm.builder()
@@ -36,6 +37,7 @@ public class ToastSettingsForm {
                 .toggle(item(lang, "opt.tooltips"), advancedTooltips)
                 .toggle(item(lang, "opt.skulls"), customSkulls)
                 .toggle(item(lang, "opt.links"), promptOnLinks)
+                .toggle(item(lang, "opt.forcesprint"), forceSprint)
                 .validResultHandler(response -> {
                     boolean newNightVision = response.next();
                     boolean newShowCoordinates = response.next();
@@ -44,7 +46,9 @@ public class ToastSettingsForm {
                     boolean newAdvancedTooltips = response.next();
                     boolean newCustomSkulls = response.next();
                     boolean newPromptOnLinks = response.next();
+                    boolean newForceSprint = response.next();
 
+                    storage.setForceSprint(xuid, newForceSprint);
                     storage.setNightVision(xuid, newNightVision);
                     storage.setShowCoordinates(xuid, newShowCoordinates);
                     storage.setShowDaysPlayed(xuid, newShowDaysPlayed);

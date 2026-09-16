@@ -51,6 +51,7 @@ public class SettingsForm {
         boolean advancedTooltips = storage.getAdvancedTooltips(xuid);
         boolean customSkulls = storage.getCustomSkulls(xuid);
         boolean promptOnLinks = storage.getPromptOnLinks(xuid);
+        boolean forceSprint = storage.getForceSprint(xuid);
 
         CooldownUtils.CooldownType cooldown = session.getPreferencesCache().getCooldownPreference();
         List<String> cooldownOptions = List.of(
@@ -96,7 +97,8 @@ public class SettingsForm {
                 .toggle(Lang.tr(lang, "opt.mining") + "｜" + Lang.tr(lang, "opt.mining.desc"), reduceParticles)
                 .toggle(Lang.tr(lang, "opt.tooltips") + "｜" + Lang.tr(lang, "opt.tooltips.desc"), advancedTooltips)
                 .toggle(Lang.tr(lang, "opt.skulls") + "｜" + Lang.tr(lang, "opt.skulls.desc"), customSkulls)
-                .toggle(Lang.tr(lang, "opt.links") + "｜" + Lang.tr(lang, "opt.links.desc"), promptOnLinks);
+                .toggle(Lang.tr(lang, "opt.links") + "｜" + Lang.tr(lang, "opt.links.desc"), promptOnLinks)
+                .toggle(Lang.tr(lang, "opt.forcesprint") + "｜" + Lang.tr(lang, "opt.forcesprint.desc"), forceSprint);
 
         boolean finalPaired = paired;
         return builder.validResultHandler(response -> {
@@ -126,6 +128,7 @@ public class SettingsForm {
             boolean newAdvancedTooltips = response.next();
             boolean newCustomSkulls = response.next();
             boolean newPromptOnLinks = response.next();
+            boolean newForceSprint = response.next();
 
             // 语言可能已改变 → 用新语言发消息
             String msgLang = Lang.resolve(session, storage);
@@ -139,6 +142,7 @@ public class SettingsForm {
             storage.setAdvancedTooltips(xuid, newAdvancedTooltips);
             storage.setCustomSkulls(xuid, newCustomSkulls);
             storage.setPromptOnLinks(xuid, newPromptOnLinks);
+            storage.setForceSprint(xuid, newForceSprint);
 
             try {
                 session.getPreferencesCache().setPrefersShowCoordinates(newShowCoordinates);

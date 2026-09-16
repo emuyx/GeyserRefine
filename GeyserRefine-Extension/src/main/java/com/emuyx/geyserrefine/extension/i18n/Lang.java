@@ -143,7 +143,9 @@ public final class Lang {
                     Map.entry("ui.vehiclehealth", "载具生命值"),
                     Map.entry("ui.tooltips", "工具提示"),
                     Map.entry("ui.touch", "触摸控制"),
-                    Map.entry("msg.uiSaved", "界面设置已更新。")
+                    Map.entry("msg.uiSaved", "界面设置已更新。"),
+                    Map.entry("opt.forcesprint", "强制疾跑"),
+                    Map.entry("opt.forcesprint.desc", "前进时自动疾跑")
             ),
             "zh_TW", Map.ofEntries(
                     Map.entry("settings.title", "基岩版綜合設定"),
@@ -214,7 +216,9 @@ public final class Lang {
                     Map.entry("ui.vehiclehealth", "載具生命值"),
                     Map.entry("ui.tooltips", "工具提示"),
                     Map.entry("ui.touch", "觸控操作"),
-                    Map.entry("msg.uiSaved", "介面設定已更新。")
+                    Map.entry("msg.uiSaved", "介面設定已更新。"),
+                    Map.entry("opt.forcesprint", "強制疾跑"),
+                    Map.entry("opt.forcesprint.desc", "前進時自動疾跑")
             ),
             "en_US", Map.ofEntries(
                     Map.entry("settings.title", "Bedrock Settings"),
@@ -285,7 +289,9 @@ public final class Lang {
                     Map.entry("ui.vehiclehealth", "Vehicle Health"),
                     Map.entry("ui.tooltips", "Tooltips"),
                     Map.entry("ui.touch", "Touch Controls"),
-                    Map.entry("msg.uiSaved", "UI settings updated.")
+                    Map.entry("msg.uiSaved", "UI settings updated."),
+                    Map.entry("opt.forcesprint", "Force Sprint"),
+                    Map.entry("opt.forcesprint.desc", "Auto-sprint while moving")
             ),
             "ja_JP", Map.ofEntries(
                     Map.entry("settings.title", "Bedrock 設定"),
@@ -356,7 +362,9 @@ public final class Lang {
                     Map.entry("ui.vehiclehealth", "乗り物の体力"),
                     Map.entry("ui.tooltips", "ツールチップ"),
                     Map.entry("ui.touch", "タッチ操作"),
-                    Map.entry("msg.uiSaved", "UI 設定を更新しました。")
+                    Map.entry("msg.uiSaved", "UI 設定を更新しました。"),
+                    Map.entry("opt.forcesprint", "強制ダッシュ"),
+                    Map.entry("opt.forcesprint.desc", "移動時に自動ダッシュ")
             )
     );
 }

@@ -2,7 +2,9 @@ package com.emuyx.geyserrefine.paper.combat;
 
 import com.emuyx.geyserrefine.paper.BedrockCombatConfig;
 import com.emuyx.geyserrefine.paper.FloodgateUtil;
+import com.emuyx.geyserrefine.paper.GeyserRefinePlugin;
 import com.emuyx.geyserrefine.paper.PlayerSettings;
+import org.bukkit.Bukkit;
 import com.emuyx.geyserrefine.paper.packet.AttackBlocker;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -55,6 +57,13 @@ public class DamageListener implements Listener {
         if (!(event.getDamager() instanceof Player attacker)) return;
         if (!FloodgateUtil.isBedrockPlayer(attacker)) return;
         if (PlayerSettings.getSetting(attacker, "java-attack")) return;
+
+        // 基岩版没有"冲刺攻击停止疾跑"的机制：Java 的攻击流程会先把疾跑置否，
+        // 这里在下一 tick 恢复，使基岩版攻击不打断疾跑。
+        if (attacker.isSprinting() || SprintKeeper.justStoppedSprinting(attacker)) {
+            Bukkit.getScheduler().runTask(GeyserRefinePlugin.getInstance(),
+                    () -> attacker.setSprinting(true));
+        }
 
         // 检测横扫攻击
         if (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_SWEEP_ATTACK) {
@@ -389,6 +398,7 @@ public class DamageListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         ComboDecayManager.cleanup(event.getPlayer());
+        SprintKeeper.forget(event.getPlayer());
     }
 
     // ========== 辅助方法 ==========
@@ -486,9 +496,10 @@ public class DamageListener implements Listener {
         double y = vel.getY() / 2 + config.knockbackVertical;
         double z = vel.getZ() / 2 - (dz / mag) * config.knockbackHorizontal;
 
+        // 基岩版不存在"疾跑攻击额外 +1 击退"的机制（那是 Java 版的行为），
+        // 因此只计击退附魔等级，不加冲刺加成。
         ItemStack weapon = attacker.getEquipment() != null ? attacker.getInventory().getItemInMainHand() : null;
         int knockbackLevel = weapon != null ? weapon.getEnchantmentLevel(Enchantment.KNOCKBACK) : 0;
-        if (attacker.isSprinting()) knockbackLevel++;
 
         if (knockbackLevel > 0) {
             double yaw = Math.toRadians(attacker.getLocation().getYaw());

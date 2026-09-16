@@ -48,14 +48,14 @@ old-tool-damage:
     minecraft:golden_hoe: 2.0
     minecraft:diamond_hoe: 2.0
     minecraft:netherite_hoe: 2.0
-    # === 矛（木矛 = 1，逐级递增） ===
-    minecraft:wooden_spear: 1.0
-    minecraft:stone_spear: 2.0
-    minecraft:copper_spear: 3.0
-    minecraft:iron_spear: 4.0
-    minecraft:golden_spear: 3.0
-    minecraft:diamond_spear: 5.0
-    minecraft:netherite_spear: 6.0
+    # === 矛（按 Wiki：总伤 木1/石2/铜2/铁3/金1/钻石4/下界5；此处填"额外"，总伤=1+该值） ===
+    minecraft:wooden_spear: 0.0
+    minecraft:stone_spear: 1.0
+    minecraft:copper_spear: 1.0
+    minecraft:iron_spear: 2.0
+    minecraft:golden_spear: 0.0
+    minecraft:diamond_spear: 3.0
+    minecraft:netherite_spear: 4.0
     # === 特殊 ===
     minecraft:mace: 5.0       # 重锤
     minecraft:trident: 8.0    # 三叉戟

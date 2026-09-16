@@ -94,6 +94,7 @@ public final class GeyserRefinePlugin extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new BedrockCombatSoundListener(config), this);
         getServer().getPluginManager().registerEvents(new BedrockFailMoveListener(config), this);
         getServer().getPluginManager().registerEvents(new BedrockSwingListener(config), this);
+        getServer().getPluginManager().registerEvents(new SprintKeeper(), this);
         getServer().getPluginManager().registerEvents(new BedrockBlockRangeListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerSettings(), this);
         //getServer().getPluginManager().registerEvents(new BedrockExperienceListener(), this);

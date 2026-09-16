@@ -22,7 +22,7 @@
         <paper.api.version>1.21.1-R0.1-SNAPSHOT</paper.api.version>
         <packetevents.version>2.12.1</packetevents.version>
         <floodgate.api.version>2.2.2-SNAPSHOT</floodgate.api.version>
-        <geyser.core.version>2.11.0-SNAPSHOT</geyser.core.version>
+        <geyser.core.version>2.11.3-SNAPSHOT</geyser.core.version>
         <viaversion.api.version>5.2.1</viaversion.api.version>
     </properties>
 

@@ -6,6 +6,7 @@
 package com.emuyx.geyserrefine.extension.translator;
 
 import com.emuyx.geyserrefine.extension.freecam.FreecamHandler;
+import com.emuyx.geyserrefine.extension.spear.SpearSounds;
 import com.emuyx.geyserrefine.extension.storage.ToastSettingsStorage;
 import org.cloudburstmc.math.GenericMath;
 import org.cloudburstmc.math.vector.Vector2f;
@@ -30,7 +31,6 @@ import org.geysermc.geyser.entity.type.player.SessionPlayerEntity;
 import org.geysermc.geyser.entity.vehicle.ClientVehicle;
 import org.geysermc.geyser.entity.vehicle.HorseVehicleComponent;
 import org.geysermc.geyser.level.physics.BoundingBox;
-import org.geysermc.geyser.network.GameProtocol;
 import org.geysermc.geyser.session.GeyserSession;
 import org.geysermc.geyser.translator.protocol.PacketTranslator;
 import org.geysermc.geyser.translator.protocol.Translator;
@@ -103,7 +103,8 @@ public final class GeyserRefineBedrockPlayerAuthInputTranslator extends PacketTr
         // ====== 灵魂出窍模式结束 ======
 
         session.setClientTicks(packet.getTick());
-        session.setInClientPredictedVehicle(packet.getInputData().contains(PlayerAuthInputData.IN_CLIENT_PREDICTED_IN_VEHICLE) && entity.getVehicle() != null && GameProtocol.is26_10orHigher(session.protocolVersion()));
+        // 新版 Geyser 简化为仅判断输入标志与载具，不再依赖协议版本判断
+        session.setInClientPredictedVehicle(packet.getInputData().contains(PlayerAuthInputData.IN_CLIENT_PREDICTED_IN_VEHICLE) && entity.getVehicle() != null);
 
         boolean wasJumping = session.getInputCache().wasJumping();
         session.getInputCache().processInputs(entity, packet);
@@ -200,6 +201,7 @@ public final class GeyserRefineBedrockPlayerAuthInputTranslator extends PacketTr
                     }
 
                     // ====== 自定义逻辑 ======
+                    // 通用空挥音（矛的戳刺走 InventoryTransaction 的 ITEM_USE/STAB 路径，见该翻译器）
                     if (storage != null && !storage.getMuteNodamageSound(session.xuid())) {
                         PlaySoundPacket nodamageSound = new PlaySoundPacket();
                         nodamageSound.setSound("game.player.attack.nodamage");

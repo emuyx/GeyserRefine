@@ -5,6 +5,7 @@ import org.cloudburstmc.protocol.bedrock.packet.MobEffectPacket;
 import org.geysermc.geyser.GeyserImpl;
 import org.geysermc.geyser.session.GeyserSession;
 
+import java.lang.reflect.Field;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -59,13 +60,42 @@ public final class NightVisionManager {
         }
     }
 
+    /**
+     * 玩家是否已有真实的夜视效果。
+     * <p>
+     * 兼容不同 Geyser 版本：优先用公开方法 {@code getEntityEffects()}（旧版），
+     * 该方法在新版被移除/私有化后，回退为反射读取私有字段 {@code entityEffects}。
+     */
     private static boolean hasRealNightVision(GeyserSession session) {
         try {
-            return session.getEffectCache().getEntityEffects().stream()
-                    .anyMatch(e -> e.name().equals("NIGHT_VISION"));
+            Object cache = session.getEffectCache();
+
+            // ① 旧版：公开方法 getEntityEffects()
+            try {
+                Object result = cache.getClass().getMethod("getEntityEffects").invoke(cache);
+                return containsNightVision(result);
+            } catch (NoSuchMethodException ignored) {
+            }
+
+            // ② 新版：反射读取私有字段 entityEffects
+            Field field = cache.getClass().getDeclaredField("entityEffects");
+            field.setAccessible(true);
+            return containsNightVision(field.get(cache));
         } catch (Exception e) {
             return false;
         }
+    }
+
+    private static boolean containsNightVision(Object collection) {
+        if (!(collection instanceof Iterable<?> iterable)) {
+            return false;
+        }
+        for (Object effect : iterable) {
+            if (effect != null && "NIGHT_VISION".equals(effect.toString())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static void sendFake(GeyserSession session, MobEffectPacket.Event event) {

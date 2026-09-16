@@ -9,12 +9,17 @@ import com.emuyx.geyserrefine.extension.network.TCPConfig;
 import com.emuyx.geyserrefine.extension.network.TCPMessage;
 import com.emuyx.geyserrefine.extension.storage.ToastSettingsStorage;
 import com.emuyx.geyserrefine.extension.translator.GeyserRefineBedrockPlayerAuthInputTranslator;
+import com.emuyx.geyserrefine.extension.translator.GeyserRefineInteractTranslator;
+import com.emuyx.geyserrefine.extension.translator.GeyserRefineInventoryTransactionTranslator;
 import com.emuyx.geyserrefine.extension.translator.GeyserRefineServerSettingsTranslator;
 import com.emuyx.geyserrefine.extension.translator.GeyserRefineSetTimeTranslator;
 import org.cloudburstmc.protocol.bedrock.data.GameRuleData;
+import org.cloudburstmc.protocol.bedrock.packet.AnimatePacket;
+import org.cloudburstmc.protocol.bedrock.packet.InventoryTransactionPacket;
 import org.cloudburstmc.protocol.bedrock.data.skin.ImageData;
 import org.cloudburstmc.protocol.bedrock.data.skin.SerializedSkin;
 import org.cloudburstmc.protocol.bedrock.packet.GameRulesChangedPacket;
+import org.cloudburstmc.protocol.bedrock.packet.InteractPacket;
 import org.cloudburstmc.protocol.bedrock.packet.PlayerAuthInputPacket;
 import org.cloudburstmc.protocol.bedrock.packet.PlayerListPacket;
 import org.cloudburstmc.protocol.bedrock.packet.ServerSettingsRequestPacket;
@@ -81,7 +86,16 @@ public class GeyserRefineExtension implements Extension, EventRegistrar {
                 ServerSettingsRequestPacket.class,
                 new GeyserRefineServerSettingsTranslator()
         );
-        // 双击背包打开菜单功能已移除，不再注册 BedrockInteractInjector
+        // 矛命中音效：包裹 Geyser 的 Interact 翻译器
+        Registries.BEDROCK_PACKET_TRANSLATORS.register(
+                InteractPacket.class,
+                new GeyserRefineInteractTranslator()
+        );
+        // 矛戳刺（ITEM_USE/STAB）：包裹 InventoryTransaction 翻译器做冷却拦截与音效
+        Registries.BEDROCK_PACKET_TRANSLATORS.register(
+                InventoryTransactionPacket.class,
+                new GeyserRefineInventoryTransactionTranslator()
+        );
 
         // 注册下行包翻译器，用于修改其他玩家的披风显示
         Registries.BEDROCK_PACKET_TRANSLATORS.register(
@@ -135,6 +149,7 @@ public class GeyserRefineExtension implements Extension, EventRegistrar {
             uuidToXuid.remove(session.javaUuid());
             FreecamHandler.cleanup(session);
             NightVisionManager.cleanup(session);
+            com.emuyx.geyserrefine.extension.spear.SpearSounds.cleanup(session);
         }
     }
 
